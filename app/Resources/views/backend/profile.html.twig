@@ -1,0 +1,223 @@
+{% extends 'base_back.html.twig' %}
+{% block body %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Mon Profil</h3>
+                </div>
+
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Mon Profil</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Settings 1</a>
+                                        </li>
+                                        <li><a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                                <div class="profile_img">
+                                    <div id="crop-avatar">
+                                        <!-- Current avatar -->
+                                        <img class="img-responsive avatar-view" src="../backend/images/picture.jpg"
+                                             alt="Avatar" title="Change the avatar">
+                                    </div>
+                                </div>
+                                <h3>{{ app.user ? app.user.prenom }} {{ app.user ? app.user.nom }}</h3>
+
+                                <ul class="list-unstyled user_data">
+                                    <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California,
+                                        USA
+                                    </li>
+
+                                    <li>
+                                        <i class="fa fa-briefcase user-profile-icon"></i> {{ app.user ? app.user.numTel }}
+                                    </li>
+
+                                </ul>
+
+                                <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                                <br/>
+
+
+                            </div>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <div class="row text-center">
+                                    <div class="col-md-2" style="margin-left: 50px">
+                                        <div style="text-align: center; margin-bottom: 17px">
+                              <span class="chart" data-percent="{{ ((note / 5)*100 )|number_format }}">
+                                                  <span class="percent"></span>
+                              </span>
+                                        </div>
+                                        <h4 class="name_title">Notes</h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div style="text-align: center; margin-bottom: 17px">
+                                            <canvas class="canvasDoughnut2" height="110" width="110" ></canvas>
+                                        </div>
+                                        <h4 class="name_title">Taches</h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div style="text-align: center; margin-bottom: 17px">
+                              <span class="chart" data-percent="{{ ((efficacite / 5)*100) |number_format}}">
+                                                  <span class="percent"></span>
+                              </span>
+                                        </div>
+                                        <h4 class="name_title">Efficacite</h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div style="text-align: center; margin-bottom: 17px">
+                              <span class="chart" data-percent="{{ ((gentillesse / 5)*100) |number_format}}">
+                                                  <span class="percent"></span>
+                              </span>
+                                        </div>
+                                        <h4 class="name_title">Gentillesse</h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div style="text-align: center; margin-bottom: 17px">
+                              <span class="chart" data-percent="{{ ((serieux / 5)*100) |number_format }}">
+                                                  <span class="percent"></span>
+                              </span>
+                                        </div>
+                                        <h4 class="name_title">Serieux</h4>
+                                    </div>
+                                </div>
+
+                                <div class="profile_title">
+                                    <div class="col-md-6">
+                                        <h2>Note du derniere semaine</h2>
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                                <!-- start of user-activity-graph -->
+                                <div id="graph_bar2" style="width:100%; height:280px;"></div>
+                                <!-- end of user-activity-graph -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="../vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    {#<!-- easy-pie-chart -->#}
+    <script src="../vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+    {#<!-- bootstrap-progressbar -->#}
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="../vendors/raphael/raphael.min.js"></script>
+    <script src="../vendors/morris.js/morris.min.js"></script>
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script>
+        function init_morris_charts2() {
+            "undefined" != typeof Morris && (console.log("init_morris_charts"), $("#graph_bar2").length && Morris.Bar({
+                element: "graph_bar2",
+                data: [{device: "{{ "now"|date("d/m/Y") }}", geekbench: {{day1 }} }, {device: "{{ "-1 day"|date("d/m/Y") }}", geekbench: {{day2 }}}, {
+                    device: "{{ "-2 day"|date("d/m/Y") }}",
+                    geekbench: {{day3 }}},{device: "{{ "-3 day"|date("d/m/Y") }}",geekbench: {{day4 }}}, {
+                    device: "{{ "-4 day"|date("d/m/Y") }}",
+                    geekbench: {{day5 }}
+                }, {device: "{{ "-5 day"|date("d/m/Y") }}", geekbench: {{day6 }}}, {
+                    device: "{{ "-6 day"|date("d/m/Y") }}",
+                    geekbench: {{day7 }}
+                }],
+                xkey: "device",
+                ykeys: ["geekbench"],
+                labels: ["Note"],
+                barRatio: .4,
+                barColors: ["#26B99A", "#34495E", "#ACADAC", "#3498DB"],
+                xLabelAngle: 35,
+                hideHover: "auto",
+                resize: !0
+            })
+            )
+        }
+
+        init_morris_charts2();
+
+    </script>
+    <script>function init_chart_doughnut2(){
+
+            if( typeof (Chart) === 'undefined'){ return; }
+
+            console.log('init_chart_doughnut');
+
+            if ($('.canvasDoughnut2').length){
+
+                var chart_doughnut_settings = {
+                    type: 'doughnut',
+                    tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+                    data: {
+                        labels: [
+                            "Resolus",
+                            "Non",
+                        ],
+                        datasets: [{
+                            data: [ {{ nbTacheResolu }},{{ nbTaches }}],
+                            backgroundColor: [
+                                "#3498DB",
+                                "#BDC3C7",
+
+                            ],
+                            hoverBackgroundColor: [
+                                "#23bbdb",
+                                "#CFD4D8",
+
+                            ]
+                        }]
+                    },
+                    options: {
+                        legend: false,
+                        responsive: false
+                    }
+                }
+
+                $('.canvasDoughnut2').each(function(){
+
+                    var chart_element = $(this);
+                    var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
+
+                });
+
+            }
+
+        }
+        init_chart_doughnut2();
+    </script>
+{% endblock %}

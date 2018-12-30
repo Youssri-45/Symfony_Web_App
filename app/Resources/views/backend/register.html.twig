@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Gentelella Alela! | </title>
+
+  <!-- Bootstrap -->
+  <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+  <!-- Animate.css -->
+  <link href="vendors/animate.css/animate.min.css" rel="stylesheet">
+
+  <!-- Custom Theme Style -->
+  <link href="backend/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="login">
+<div>
+  <a class="hiddenanchor" id="signup"></a>
+  <a class="hiddenanchor" id="signin"></a>
+
+  <div class="login_wrapper">
+    <div  class="form ">
+      <section class="login_content">
+          {% for error in errors %}
+            <div class="alert alert-danger" role="alert">{{ error.message }}</div>
+          {% endfor %}
+        <h1>Create Account</h1>
+          {{ form_start(form) }}
+        <div>
+            {{ form_row(form.prenom) }}
+        </div>
+        <div>
+            {{ form_row(form.nom) }}
+        </div>
+        <div>
+            {{ form_row(form.numTel) }}
+        </div>
+        <div>
+            {{ form_row(form.email) }}
+        </div>
+        <div>
+            {{ form_row(form.password.first) }}
+        </div>
+        <div>
+            {{ form_row(form.password.second) }}
+        </div>
+        <div>
+          <button class="btn btn-default submit" type="submit" >Submit</button>
+        </div>
+          {{ form_end(form) }}
+
+        <div class="clearfix"></div>
+
+        <div class="separator">
+          <p class="change_link">Already a member ?
+            <a href="#signin" class="to_register"> Log in </a>
+          </p>
+
+          <div class="clearfix"></div>
+          <br />
+
+        </div>
+
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

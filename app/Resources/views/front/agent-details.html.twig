@@ -1,0 +1,83 @@
+{% extends 'base_front.html.twig' %}
+{% block body %}
+    <div class="tp-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="agent-result.html">Agent Listing</a></li>
+                        <li class="active">Agent Details</li>
+                    </ol>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-container" id="main-container"><!--Main container start-->
+        <div class="tp-agent-detail" id="tp-agent-detail"><!-- agent detail section -->
+
+            <div class="container">
+                {% for flash_message in app.session.flashBag.get('success') %}
+                    <div class="alert alert-success" role="alert" style="margin-bottom: 50px">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+
+                {% if tache %}
+                    <div class="promo-box" style="margin: -20px 0 35px 0"><!-- promo box -->
+                        <i class="fa fa-bell-o icon-circle"></i>
+                        <div class="promo-caption"><!-- promo caption -->
+                            <h2><span>{{ tache.employer.prenom }} {{ tache.employer.nom }}</span> était-il utile dans
+                                votre dernier appel avec lui?</h2>
+                            <a href="{{ path('noter_client',{ 'id' : tache.id }) }}"
+                               class="btn tp-btn tp-btn-orange tp-btn-default">Donner lui une note</a>
+                        </div><!-- /.promo caption -->
+                    </div>
+                {% endif %}
+                <div class="row agent-detail" {% if tache %}
+                     style="padding-top: 35px;border-top: 1px solid #e2e6ed;{% endif %}">
+                    <div class="col-md-4"><img src="images/agent-detail.jpg" class="img-responsive" alt=""></div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>{{ app.user ? app.user.prenom }} {{ app.user ? app.user.nom }}</h1>
+                            </div>
+                            <div class="col-md-6" style="margin-top: 50px;">
+                                <div class="detail-block"><!-- detail block -->
+                                    <h3><i class="fa fa-map-marker"></i> Address</h3>
+                                    <ul>
+                                        <li>Ajouter une adresse</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-block"><!-- detail block -->
+                                    <h3><i class="fa fa-envelope"></i> E-mail</h3>
+                                    <p><a href="#">{{ app.user ? app.user.email }}</a></p>
+                                </div>
+                                <!-- /.detail block -->
+
+
+                                <!-- /.detail block -->
+                            </div>
+                            <div class="col-md-6" style="margin-top: 50px;">
+                                <div class="detail-block num-block"><!-- detail block -->
+                                    <ul>
+                                        <li><i class="fa fa-phone-square"></i> {{ app.user ? app.user.numTel }} </li>
+                                        <li><i class="fa fa-fax"></i> Ajouter numéro de fax</li>
+                                    </ul>
+                                </div>
+                                <div class="contact-block"><!-- detail block -->
+                                    <a href="#" class="btn btn-block tp-btn tp-btn-orange">modifier les informations</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- agent detail section -->
+    </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base_front.html.twig' %}
+
+{% block body %}
+    <div class="tp-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="agent-result.html">Agent Listing</a></li>
+                        <li class="active">Agent Details</li>
+                    </ol>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <div class="row">
+                <div class="main-container" id="main-container">
+                    <table class="table table-hover table-condensed table-responsive">
+                        <thead >
+                        <tr>
+                            <th style="border-bottom: 1px solid #e2e6ed;padding-bottom: 15px;">
+                                Nom Tache
+                            </th>
+                            <th style="border-bottom: 1px solid #e2e6ed;padding-bottom: 15px;">
+                                Description
+                            </th>
+                            <th style="border-bottom: 1px solid #e2e6ed;padding-bottom: 15px;">
+                                Employé
+                            </th>
+                            <th style="border-bottom: 1px solid #e2e6ed;padding-bottom: 15px;">
+                                Résolu
+                            </th>
+                            <th style="border-bottom: 1px solid #e2e6ed;padding-bottom: 15px;">
+                                Note
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for tache in taches %}
+                            <tr>
+                                <td>
+                                    {{ tache.nomtache |capitalize }}
+                                </td>
+                                <td>
+                                    {{ tache.description |length > 50 ? tache.description|capitalize|slice(0, 50) ~ '...' : tache.description |capitalize }}
+                                </td>
+                                <td>
+                                    {{ tache.employer.prenom |capitalize }} {{ tache.employer.nom |capitalize }}
+                                </td>
+                                <td>
+                                    {% if tache.isresolved %}
+                                        Oui
+                                    {% else %}
+                                        Non
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if tache.note %}
+                                        <span class="btn tp-btn tp-btn-blue" style="width: 84px">{{ tache.note.note | round(1,'floor') }}</span>
+                                    {% else %}
+                                        <a class="btn tp-btn tp-btn-orange" href="{{ path('noter_client',{ 'id' : tache.id}) }}">Noter</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

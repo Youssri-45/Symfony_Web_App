@@ -1,0 +1,67 @@
+{% extends "base_front.html.twig" %}
+{% block body %}
+<div class="tp-breadcrumb"><!-- breadcrumb -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ol class="breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li class="active">Career Form</li>
+        </ol>
+      </div>
+      <div class="col-md-4">
+        <div class="font-option"><!-- font option --> 
+          Select font size : <a href="#" id="incfont">A+</a><a href="#" id="decfont">A-</a> </div>
+        <!-- /.font option --> 
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.breadcrumb -->
+<div class="main-container" id="main-container"> 
+  <!--Main container start-->
+  <div class="tp-career-form" id="tp-career-form"><!--career-form-->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 tp-title">
+          <h1>Modifier Vos Informations</h1>
+          <p>Remplir les champs que vous voulez modifier </p>
+        </div>
+        <div class="col-md-offset-1 col-md-10 career-form">
+          {{ form_start(form,{attr: {novalidate: 'novalidate'}}) }}
+            <div class="col-md-6">
+              <label class="control-label" for="firstname">Prenom</label>
+              {{ form_widget(form.prenom) }}
+            </div>
+            <div class="col-md-6">
+              <label class="control-label" for="lastname">Nom</label>
+                {{ form_widget(form.nom) }}
+            </div>
+            <div class="col-md-6">
+              <label class="control-label" for="email">E-mail</label>
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="col-md-6">
+              <label class="control-label" for="city">Numero Telephone</label>
+                {{ form_widget(form.numTel) }}
+            </div>
+            <div class="col-md-6">
+              <label class="control-label" for="state">Mot De Passe</label>
+                {{ form_widget(form.password.first) }}
+            </div>
+            <div class="col-md-6">
+              <label class="control-label" for="interest">Confirmer Mot De Passe</label>
+                {{ form_widget(form.password.second) }}
+            </div>
+            <div class="col-md-12">
+              <button type="submit" class="btn tp-btn tp-btn-orange">Submit </button>
+            </div>
+          {{ form_end(form) }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.career-form--> 
+</div>
+<!-- /.Main container start-->
+{% endblock %}

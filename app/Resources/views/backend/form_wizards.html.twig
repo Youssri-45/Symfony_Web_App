@@ -1,0 +1,206 @@
+{% extends 'base_back.html.twig' %}
+{% block stylesheet %}
+    {{ parent() }}
+    <style>
+        @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+        fieldset, label {
+            margin: 0;
+            padding: 0;
+        }
+
+        /****** Style Star Rating Widget *****/
+
+        .rating {
+            border: none;
+            float: left;
+        }
+
+        .rating > input {
+            display: none;
+        }
+
+        .rating > label:before {
+            margin: 5px;
+            font-size: 1.25em;
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f005";
+        }
+
+        .rating > .half:before {
+            content: "\f089";
+            position: absolute;
+        }
+
+        .rating > label {
+            color: #ddd;
+            float: right;
+        }
+
+        /***** CSS Magic to Highlight Stars on Hover *****/
+
+        .rating > input:checked ~ label, /* show gold star when clicked */
+        .rating:not(:checked) > label:hover, /* hover current star */
+        .rating:not(:checked) > label:hover ~ label {
+            color: #FFD700;
+        }
+
+        /* hover previous stars in list */
+
+        .rating > input:checked + label:hover, /* hover current star when changing rating */
+        .rating > input:checked ~ label:hover,
+        .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+        .rating > input:checked ~ label:hover ~ label {
+            color: #FFED85;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Noter un collegue</h3>
+                </div>
+
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                          </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Noter un collegue
+                            </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Settings 1</a>
+                                        </li>
+                                        <li><a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div id="wizard" class="form_wizard wizard_horizontal">
+                                <ul class="wizard_steps">
+                                    <li>
+                                        <a href="#step-1">
+                                            <span class="step_no">1</span>
+                                            <span class="step_descr">
+                                              Step 1<br/>
+                                          </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#step-2">
+                                            <span class="step_no">2</span>
+                                            <span class="step_descr">
+                                              Step 2<br/>
+                                          </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#step-3">
+                                            <span class="step_no">3</span>
+                                            <span class="step_descr">
+                                              Step 3<br/>
+                                          </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#step-4">
+                                            <span class="step_no">4</span>
+                                            <span class="step_descr">
+                                              Step 4<br/>
+                                          </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                {{ form_start(form) }}
+                                <div id="step-1">
+                                    <div class="form-horizontal form-label-left">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Gentillesse
+                                                <span class="required">*</span>
+                                            </label>
+                                            {{ form_widget(form.gentillesse) }}
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="step-2">
+                                    <div class="form-horizontal form-label-left">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Serieux<span
+                                                        class="required">*</span>
+                                            </label>
+                                            {{ form_widget(form.serieux) }}
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="step-3">
+
+                                    <div class="form-horizontal form-label-left">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Efficacité<span
+                                                        class="required">*</span>
+                                            </label>
+                                            {{ form_widget(form.efficacite) }}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="step-4">
+                                    <button type="submit" class="btn btn-success" style="margin-left: 150px">Submit
+                                    </button>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                            <!-- End SmartWizard Content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <!-- jQuery -->
+    <script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <!-- FastClick -->
+    <script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
+    <!-- NProgress -->
+    <script src="{{ asset('vendors/nprogress/nprogress.js') }}"></script>
+    <!-- jQuery Smart Wizard -->
+    <script src="{{ asset('vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js') }}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{{ asset('backend/js/custom.min.js') }}"></script>
+{% endblock %}

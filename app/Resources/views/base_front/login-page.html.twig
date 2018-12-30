@@ -1,0 +1,61 @@
+{% extends "base_front.html.twig" %}
+{% block body %}
+<div class="main-container" id="main-container"><!--Main container start-->
+  <div class="form-page" id="form-page"><!-- form section -->
+  	<div class="container">
+    	<div class="row">
+        	<div class="col-md-offset-1 col-md-10">
+                {% block errors %}
+                {% endblock %}
+            	<div class="row">
+                	<div class="col-md-6">
+                    	<div class="grey-box"><!-- greay box -->
+                        	<h2 class="tp-title">Account Log In</h2>
+                            {% block login %}
+                            <form>
+                                <!-- Text input-->
+                                <div class="form-group">
+                                  <label class="control-label" for="email">E - mail</label>  
+                                  
+                                  <input id="email" name="email" type="text" placeholder="" class="form-control input-md" required>
+                                </div>
+                                
+                                <!-- Text input-->
+                                <div class="form-group">
+                                  <label class="control-label" for="password">Password</label>  
+                                  <input id="password" name="password" type="text" placeholder="" class="form-control input-md" required>
+                                    
+                                </div>
+                                
+                                <!-- Button -->
+                                <div class="form-group">
+                                  <label class="control-label" for="button"></label>
+                                    <button id="button" name="button" class="btn tp-btn tp-btn-orange">login</button>
+                                </div>
+                                <small><a href="#">Forgot Password?</a></small>
+                                </form>
+                            {% endblock %}
+                            
+                            
+                        </div><!-- /.greay box -->
+                    </div>
+                    <div class="col-md-6">
+                    	<div class="grey-box"><!-- greay box -->
+                        	<h2>Are you new? @ peace insurance</h2>
+                            <p>Get the convenience of online Account management today. Registed today new account.</p>
+                            <a href="register-page.html" class="btn tp-btn tp-btn-orange">Register Now</a>
+                        </div><!-- /.greay box -->
+                        <div class="grey-box"><!-- greay box -->
+                        	<h2>Have a Question ?</h2>
+                            <p>Have a question ? Please visit our support center.</p>
+                            <a href="faq%27s.html" class="btn tp-btn tp-btn-orange">FAQ’s</a>
+                        </div><!-- /.greay box -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- form section -->
+</div>
+{% endblock %}

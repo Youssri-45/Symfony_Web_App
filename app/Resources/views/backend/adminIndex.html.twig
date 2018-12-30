@@ -1,0 +1,286 @@
+{% extends 'base_back_admin.html.twig' %}
+{% block body %}
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <!-- top tiles -->
+          <div class="row tile_count">
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Employes</span>
+              <div class="count">{{ nbEmployers }}</div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Clients</span>
+              <div class="count">{{ nbClients }}</div>
+              </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Taches</span>
+              <div class="count green">{{ nbTaches }}</div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Taches Resolus</span>
+              <div class="count">{{ nbTachesRes }}</div>
+            </div>
+          </div>
+          <!-- /top tiles -->
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="dashboard_graph">
+
+                <div class="row x_title">
+                  <div class="col-md-6">
+                    <h3>Meilleurs Employés</h3>
+                  </div>
+                  <div class="col-md-6">
+                  </div>
+                </div>
+
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                  <div id="graph_bar2" style="width:100%; height:280px;"></div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                  <div class="x_panel tile fixed_height_320 overflow_hidden" style="border: none  ">
+                    <div class="x_title">
+                      <h2>Meilleur employé</h2>
+                      <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                      <table class="" style="width:100%">
+                        <tr>
+                          <th style="width:37%;" class="text-center ">
+                            <p>{{ bestEmployer.prenom | capitalize }} {{ bestEmployer.nom | capitalize }}</p>
+                          </th>
+
+                        </tr>
+                        <tr>
+                          <td>
+                            <canvas class="canvasDoughnut2" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+                          </td>
+                          <td>
+                            <table class="tile_info">
+                              <tr>
+                                <td>
+                                  <p><i class="fa fa-square green"></i>Note</p>
+                                </td>
+                                <td>{{ bestEmployer.noteTotale|number_format(2,',','.') }}</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p><i class="fa fa-square blue"></i> Assiduité</p>
+                                </td>
+                                <td>{{ bestEmployer.assiduite }}</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p><i class="fa fa-square purple"></i>Serieux </p>
+                                </td>
+                                <td>{{ bestEmployer.serieuxTotale }}</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p><i class="fa fa-square aero"></i>Efficacité </p>
+                                </td>
+                                <td>{{ bestEmployer.efficaciteTotale }}</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p><i class="fa fa-square red"></i>Gentillesse </p>
+                                </td>
+                                <td>{{ bestEmployer.gentillesseTotale }}</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+              </div>
+            </div>
+
+          </div>
+          <br />
+
+          <div class="row">
+
+
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel tile fixed_height_320">
+                <div class="x_title">
+                  <h2>Les employés les plus efficaces</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  {% for employer in employersEfficace |slice(0, 4) %}
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>{{ employer.prenom | capitalize }} {{ employer.nom | capitalize }}</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="{{ ((employer.efficaciteTotale)/5 ) *100 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((employer.efficaciteTotale)/5 ) *100 }}%;">
+                          <span class="sr-only">{{ employer.efficaciteTotale }}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w_right w_20">
+                      <span>{{ employer.efficaciteTotale }}</span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  {% endfor %}
+
+
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel tile fixed_height_320">
+                <div class="x_title">
+                  <h2>Les employés les plus serieux</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    {% for employer in employersSerieux |slice(0, 4) %}
+                      <div class="widget_summary">
+                        <div class="w_left w_25">
+                          <span>{{ employer.prenom | capitalize }} {{ employer.nom | capitalize }}</span>
+                        </div>
+                        <div class="w_center w_55">
+                          <div class="progress">
+                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="{{ ((employer.serieuxTotale)/5 ) *100 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((employer. serieuxTotale)/5 ) *100 }}%;">
+                              <span class="sr-only">{{ employer. serieuxTotale }}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="w_right w_20">
+                          <span>{{ employer. serieuxTotale }}</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    {% endfor %}
+
+
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel tile fixed_height_320">
+                <div class="x_title">
+                  <h2>Les employés les plus gentilles</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    {% for employer in employersGentille |slice(0, 4) %}
+                      <div class="widget_summary">
+                        <div class="w_left w_25">
+                          <span>{{ employer.prenom | capitalize }} {{ employer.nom | capitalize }}</span>
+                        </div>
+                        <div class="w_center w_55">
+                          <div class="progress">
+                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="{{ ((employer.gentillesseTotale)/5 ) *100 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((employer.gentillesseTotale)/5 ) *100 }}%;">
+                              <span class="sr-only">{{ employer.gentillesseTotale }}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="w_right w_20">
+                          <span>{{ employer.gentillesseTotale }}</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    {% endfor %}
+
+
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+        <!-- /page content -->
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+  <script src="../vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    {#<!-- easy-pie-chart -->#}
+  <script src="../vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+    {#<!-- bootstrap-progressbar -->#}
+  <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="../vendors/raphael/raphael.min.js"></script>
+  <script src="../vendors/morris.js/morris.min.js"></script>
+  <script src="../vendors/moment/min/moment.min.js"></script>
+  <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script>
+        function init_chart_doughnut2() {
+            if ("undefined" != typeof Chart && (console.log("init_chart_doughnut"), $(".canvasDoughnut2").length)) {
+                var a = {
+                    type: "doughnut",
+                    tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+                    data: {
+                        labels: ["Assiduité", "Serieux", "Efficacité", "Gentillesse"],
+                        datasets: [{
+                            data: [ {{ bestEmployer.assiduite}}, {{ bestEmployer.serieuxTotale}}, {{ bestEmployer.efficaciteTotale}}, {{ bestEmployer.gentillesseTotale}}],
+                            backgroundColor: ["#3498DB", "#9B59B6", "#CFD4D8", "#E95E4F"],
+                            hoverBackgroundColor: ["#3498DB", "#9B59B6", "#CFD4D8", "#E95E4F"]
+                        }]
+                    },
+                    options: {legend: !1, responsive: !1}
+                };
+                $(".canvasDoughnut2").each(function () {
+                    var b = $(this);
+                    new Chart(b, a)
+                })
+            }
+        }
+        new init_chart_doughnut2();
+    </script>
+  <script>
+      function init_morris_charts2() {
+          "undefined" != typeof Morris && (console.log("init_morris_charts"), $("#graph_bar2").length && Morris.Bar({
+                  element: "graph_bar2",
+
+                        data:[{% for employer in employers %}
+                         {device: "{{ employer.prenom }} {{ employer.nom }}", geekbench: {{ employer.noteTotale }} },
+                        {% endfor %}
+                        ],
+                  xkey: "device",
+                  ykeys: ["geekbench"],
+                  labels: ["Note"],
+                  barRatio: .4,
+                  barColors: ["#26B99A", "#34495E", "#ACADAC", "#3498DB"],
+                  xLabelAngle: 35,
+                  hideHover: "auto",
+                  resize: !0
+              })
+          )
+      }
+
+      init_morris_charts2();
+
+  </script>
+{% endblock %}
